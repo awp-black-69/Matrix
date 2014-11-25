@@ -27,7 +27,7 @@
 
 				return {error: 0};
 			},
-			new: function(args){
+			create: function(args){
 				return new M(args);
 			},
 			multiply: function(m1, m2){
@@ -44,14 +44,14 @@
 				return JSON.parse(JSON.stringify(obj));
 			},
 			subMatrix: function(rows, i, j){
-				var rows = pri.clone(rows),
+				var r = pri.clone(rows),
 					index;
 
-				rows.splice(i,1);
-				index = rows.length;
-				while(index--) rows[index].splice(j, 1);
+				r.splice(i,1);
+				index = r.length;
+				while(index--) r[index].splice(j, 1);
 
-				return rows;
+				return r;
 			},
 			isSquare: function(rows){
 				if(rows.length === 0) return true;
@@ -181,7 +181,7 @@
 
 		adj = pri.evalAdjoint(this.rows);
 
-		return mat.new(pri.scale(adj, det, true));
+		return mat.create(pri.scale(adj, det, true));
 	};
 	M.prototype.determinent = function(){
 		var errs;
@@ -205,7 +205,7 @@
 			throw new Error(errs.message);
 		}
 
-		return new mat.new(pri.evalAdjoint(this.rows));
+		return new mat.create(pri.evalAdjoint(this.rows));
 	};
 	M.prototype.transpose = function(){
 		if(!pri.isSquare(this.rows)) {
@@ -216,14 +216,14 @@
 			throw new Error(errs.message);
 		}
 
-		return new mat.new(pri.evalTranspose(this.rows));
+		return new mat.create(pri.evalTranspose(this.rows));
 	};
 	M.prototype.multiply = function(mul){
-		return mat.new(pri.scale(this.rows, mul));
+		return mat.create(pri.scale(this.rows, mul));
 	};
 	M.prototype.divide = function(div){
 		if(div == 0) throw new Error(error.DIV_BY_0);
-		return mat.new(pri.scale(this.rows, div, true));
+		return mat.create(pri.scale(this.rows, div, true));
 	};
 
 	w.Matrix = mat;
