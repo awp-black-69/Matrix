@@ -18,7 +18,7 @@ var mat = Matrix.create( [ [1,5,2], [5,2,7], [22, 645, 6] ] );
 
 **Determinant**
 
-```mat.matrix()``` Returns determinant of matrix, mat. Return type : **int**
+```mat.determinent()``` Returns determinant of matrix, mat. Return type : **int**
 
 **Get ith row**
 
